@@ -1,0 +1,30 @@
+{
+  "name": "clockgrove",
+  "owner": { "name": "Clockgrove" },
+  "metadata": {
+    "description": "Clockgrove engineering capability packages",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "clockgrove-factory",
+      "description": "GitHub-native engineering-management capability package centered on Director.",
+      "version": "1.0.0",
+      "source": {
+        "source": "github",
+        "repo": "clockgrove/factory",
+        "ref": "main"
+      }
+    },
+    {
+      "name": "clockgrove-skills",
+      "description": "Reusable Clockgrove product and engineering skills.",
+      "version": "1.0.0",
+      "source": {
+        "source": "github",
+        "repo": "clockgrove/skills",
+        "ref": "main"
+      }
+    }
+  ]
+}
