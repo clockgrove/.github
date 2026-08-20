@@ -30,6 +30,6 @@ Target repositories can enable the marketplace and packages declaratively throug
 
 ## Release discipline
 
-Versioned capability entries use the GitHub Copilot source object's `ref` field and pin it to a full immutable commit SHA, never a moving branch or tag. `scripts/validate-marketplace.py` and the corresponding GitHub Actions check enforce the release inventory and pin format before changes are merged.
+Versioned capability entries use the GitHub Copilot source object's `sha` field with a full immutable commit SHA, as recommended for reproducible installs. They never use a moving branch or tag. `scripts/validate-marketplace.py` and the corresponding GitHub Actions check enforce the release inventory and pin format before changes are merged.
 
 Consumer repositories may additionally pin the marketplace repository itself to a reviewed commit SHA so their complete capability resolution is reproducible.
