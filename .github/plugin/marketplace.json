@@ -13,7 +13,7 @@
       "source": {
         "source": "github",
         "repo": "clockgrove/factory",
-        "ref": "main"
+        "sha": "c5e1ab62a9679dc121fce203379fd9270cb7941d"
       }
     },
     {
@@ -23,7 +23,7 @@
       "source": {
         "source": "github",
         "repo": "clockgrove/skills",
-        "ref": "main"
+        "sha": "07d7d7dfa316356976f0a58e7d89d3fc217525e1"
       }
     }
   ]
