@@ -11,10 +11,13 @@ errors: list[str] = []
 def err(msg: str): errors.append(msg)
 
 if data.get('name') != 'clockgrove': err('marketplace name mismatch')
-if data.get('metadata', {}).get('version') != '1.0.0': err('marketplace release version must be 1.0.0')
+if data.get('metadata', {}).get('version') != '1.0.1': err('marketplace release version must be 1.0.1')
 plugins = data.get('plugins')
 if not isinstance(plugins, list): err('plugins must be a list'); plugins = []
-expected = {'clockgrove-factory': 'clockgrove/factory', 'clockgrove-skills': 'clockgrove/skills'}
+expected = {
+    'clockgrove-factory': ('clockgrove/factory', '1.0.1'),
+    'clockgrove-skills': ('clockgrove/skills', '1.0.0'),
+}
 seen = set()
 for plugin in plugins:
     name = plugin.get('name')
@@ -22,10 +25,11 @@ for plugin in plugins:
     if name not in expected:
         err(f'unexpected plugin {name}')
         continue
-    if plugin.get('version') != '1.0.0': err(f'{name}: expected version 1.0.0')
+    expected_repo, expected_version = expected[name]
+    if plugin.get('version') != expected_version: err(f'{name}: expected version {expected_version}')
     source = plugin.get('source', {})
     if source.get('source') != 'github': err(f'{name}: source must be github')
-    if source.get('repo') != expected[name]: err(f'{name}: wrong repo')
+    if source.get('repo') != expected_repo: err(f'{name}: wrong repo')
     sha = source.get('sha')
     if not isinstance(sha, str) or not re.fullmatch(r'[0-9a-f]{40}', sha):
         err(f'{name}: source sha must be a full 40-character commit SHA')
