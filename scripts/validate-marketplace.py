@@ -11,11 +11,11 @@ errors: list[str] = []
 def err(msg: str): errors.append(msg)
 
 if data.get('name') != 'clockgrove': err('marketplace name mismatch')
-if data.get('metadata', {}).get('version') != '1.1.3': err('marketplace release version must be 1.1.3')
+if data.get('metadata', {}).get('version') != '1.2.0': err('marketplace release version must be 1.2.0')
 plugins = data.get('plugins')
 if not isinstance(plugins, list): err('plugins must be a list'); plugins = []
 expected = {
-    'clockgrove-factory': ('clockgrove/factory', '1.1.3'),
+    'clockgrove-factory': ('clockgrove/factory', '1.2.0'),
     'clockgrove-skills': ('clockgrove/skills', '1.0.1'),
 }
 seen = set()
