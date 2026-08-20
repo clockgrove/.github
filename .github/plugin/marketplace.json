@@ -3,17 +3,17 @@
   "owner": { "name": "Clockgrove" },
   "metadata": {
     "description": "Clockgrove engineering capability packages",
-    "version": "1.2.0"
+    "version": "1.2.1"
   },
   "plugins": [
     {
       "name": "clockgrove-factory",
       "description": "GitHub-native engineering-management capability package centered on Director.",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "source": {
         "source": "github",
         "repo": "clockgrove/factory",
-        "sha": "21a4766b3f96262613d51cbf438aab5887a2b1a6"
+        "sha": "c6a38fcbe2f51fe572fa6321bcd98ecbd9dfb4e2"
       }
     },
     {
