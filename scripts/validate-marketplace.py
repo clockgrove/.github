@@ -26,10 +26,12 @@ for plugin in plugins:
     source = plugin.get('source', {})
     if source.get('source') != 'github': err(f'{name}: source must be github')
     if source.get('repo') != expected[name]: err(f'{name}: wrong repo')
-    sha = source.get('sha')
-    if not isinstance(sha, str) or not re.fullmatch(r'[0-9a-f]{40}', sha):
-        err(f'{name}: source must be pinned by full 40-character sha')
-    if 'ref' in source: err(f'{name}: versioned release must not use moving ref')
+    ref = source.get('ref')
+    if not isinstance(ref, str) or not re.fullmatch(r'[0-9a-f]{40}', ref):
+        err(f'{name}: source ref must be a full 40-character commit SHA')
+    if 'sha' in source: err(f'{name}: obsolete source sha field is not GitHub Copilot compatible; use ref')
+    unexpected = set(source) - {'source', 'repo', 'ref'}
+    if unexpected: err(f'{name}: unexpected source fields: {sorted(unexpected)}')
 if seen != set(expected): err(f'plugin inventory mismatch: {seen}')
 
 if errors:
@@ -37,4 +39,4 @@ if errors:
     for e in errors: print(f'- {e}')
     sys.exit(1)
 print('Marketplace validation passed')
-for plugin in plugins: print(f'- {plugin["name"]} {plugin["version"]} @ {plugin["source"]["sha"]}')
+for plugin in plugins: print(f'- {plugin["name"]} {plugin["version"]} @ {plugin["source"]["ref"]}')
