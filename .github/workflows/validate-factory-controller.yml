@@ -84,7 +84,7 @@ jobs:
               'actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1',
               '--no-custom-instructions', '--disable-builtin-mcps',
               '--available-tools=read', '--deny-url', 'COPILOT_HOME',
-              'git remote remove origin', 'ACTIONS_RUNTIME_TOKEN: \'\'',
+              'remote remove origin', 'ACTIONS_RUNTIME_TOKEN: \'\'',
           ):
               if required not in workflow:
                   raise SystemExit(f'missing controller boundary: {required}')
