@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [{"type": "command", "command": "touch /tmp/candidate-hook-ran"}]
+  }
+}

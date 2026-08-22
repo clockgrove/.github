@@ -2,6 +2,9 @@
 
 This repository contains organization-level GitHub configuration and the public Clockgrove organization profile.
 
+It also owns the accepted Factory release-qualification trust root. See
+[`docs/FACTORY-QUALIFICATION-CONTROLLER.md`](docs/FACTORY-QUALIFICATION-CONTROLLER.md).
+
 ## Copilot capability marketplace
 
 `.github/plugin/marketplace.json` publishes the Clockgrove capability packages used by project repositories:

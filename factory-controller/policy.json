@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "controller_version": "1.0.0",
+  "candidate_repository": "clockgrove/factory",
+  "accepted_factory_sha": "fe77c3f93186fa0a33effdf3e9d1fb83a1a0cd6f",
+  "workflow_path": ".github/workflows/factory-accepted-qualification.yml",
+  "copilot_cli_version": "1.0.54",
+  "models": [
+    "gpt-5.6-sol",
+    "gpt-5.6-terra",
+    "claude-opus-5"
+  ],
+  "declared_candidate_inputs": [
+    ".github/agents/clockgrove-director.agent.md",
+    ".github/skills/*/SKILL.md",
+    "policies/*.md",
+    "config/*.json",
+    "plugin.json"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "state": "bootstrap_pending",
+  "accepted_controller_sha": null,
+  "accepted_factory_sha": "fe77c3f93186fa0a33effdf3e9d1fb83a1a0cd6f",
+  "revoked_controller_shas": [],
+  "revoked_candidate_shas": []
+}

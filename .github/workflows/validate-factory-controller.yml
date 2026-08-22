@@ -1,0 +1,94 @@
+name: Validate accepted Factory controller
+
+on:
+  pull_request:
+    paths:
+      - factory-controller/**
+      - scripts/factory_qualification_controller.py
+      - tests/**
+      - .github/workflows/validate-factory-controller.yml
+      - .github/workflows/factory-accepted-qualification.yml
+  push:
+    branches: [main]
+    paths:
+      - factory-controller/**
+      - scripts/factory_qualification_controller.py
+      - tests/**
+      - .github/workflows/validate-factory-controller.yml
+      - .github/workflows/factory-accepted-qualification.yml
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+
+  secretless-sandbox-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build immutable-base sandbox
+        run: |
+          docker pull python@sha256:e16ab55c341bfd0e7da665bc2d48939cff890b43a41867fe6e1f0690638ceb7c
+          docker build --network none --pull=false --tag factory-accepted-controller -f factory-controller/Dockerfile .
+      - name: Valid child is accepted by outer supervisor
+        run: |
+          docker run --rm --network none --read-only --cap-drop ALL \
+            --security-opt no-new-privileges --pids-limit 64 --memory 256m --cpus 1 \
+            --tmpfs /tmp:rw,noexec,nosuid,size=16m \
+            --volume "$PWD/tests/fixtures:/fixture:ro" \
+            factory-accepted-controller fixture --executable /fixture/valid.py \
+            --expected '{"status":"ok"}' --expect-decision pass
+      - name: Exit-zero and stdout-spoof children fail closed
+        run: |
+          for fixture in os_exit.py stdout_spoof.py; do
+            docker run --rm --network none --read-only --cap-drop ALL \
+              --security-opt no-new-privileges --pids-limit 64 --memory 256m --cpus 1 \
+              --tmpfs /tmp:rw,noexec,nosuid,size=16m \
+              --volume "$PWD/tests/fixtures:/fixture:ro" \
+              factory-accepted-controller fixture --executable "/fixture/$fixture" \
+              --expected '{"status":"ok"}' --expect-decision fail
+          done
+      - name: Candidate hook configuration is inert
+        run: |
+          docker run --rm --network none --read-only --cap-drop ALL \
+            --security-opt no-new-privileges --pids-limit 64 --memory 256m --cpus 1 \
+            --tmpfs /tmp:rw,noexec,nosuid,size=16m \
+            --volume "$PWD/tests/fixtures/hook:/fixture:ro" \
+            factory-accepted-controller fixture --executable /fixture/payload.py \
+            --expected '{"status":"ok"}' --expect-decision pass
+
+  workflow-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Enforce trusted-controller boundaries
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          workflow = Path('.github/workflows/factory-accepted-qualification.yml').read_text()
+          for required in (
+              'environment: factory-release', 'github.workflow_sha',
+              'FACTORY_CANDIDATE_READ_TOKEN', 'FACTORY_QUALIFICATION_COPILOT_TOKEN',
+              'FACTORY_FETCH_CREDENTIAL_MODE', 'FACTORY_QUALIFICATION_APP_PRIVATE_KEY',
+              'actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1',
+              '--no-custom-instructions', '--disable-builtin-mcps',
+              '--available-tools=read', '--deny-url', 'COPILOT_HOME',
+              'git remote remove origin', 'ACTIONS_RUNTIME_TOKEN: \'\'',
+          ):
+              if required not in workflow:
+                  raise SystemExit(f'missing controller boundary: {required}')
+          if 'pull_request_target:' in workflow or '\n  pull_request:' in workflow:
+              raise SystemExit('secret-bearing accepted controller cannot run on pull requests')
+          print('trusted-controller workflow boundary passed')
+          PY
