@@ -1,33 +1,29 @@
 # Clockgrove
 
-Clockgrove is an open-source project exploring persistent artificial-life worlds: deterministic physical simulation paired with agentic cognition, memory, conversation, causality, and worlds that continue to change over time.
+Clockgrove is an open-source platform for building persistent artificial-life worlds: places that keep time, change while nobody is watching, remember what happened, and give their inhabitants meaningful lives of their own.
 
-## Repositories
+Our guiding idea is simple:
 
-### `clockgrove/clockgrove`
+> Build persistent worlds from deterministic physical truth and subjective, agentic cognition.
 
-The Clockgrove platform/runtime and its reference world. This is where product requirements, runtime architecture, world semantics, implementation waves, and product source live.
+## Worlds that feel alive
 
-### `clockgrove/factory`
+Clockgrove brings together:
 
-A GitHub-native engineering-management capability package centered on **Director**. Factory turns human Objectives into planned, prioritized, supervised, evaluated, and continuously improving engineering work while using GitHub for project/execution state and deterministic guardrails wherever possible.
+- persistent simulation, where time, weather, resources, movement, and growth continue to matter;
+- characters who perceive, remember, form beliefs, build relationships, and learn from experience;
+- conversations grounded in what each character knows and has lived through;
+- inspectable history, so important events and behaviors can be traced back to their causes; and
+- safe creative tools for shaping worlds without giving AI unchecked control over their reality.
 
-### `clockgrove/skills`
+The simulation remains the source of truth. AI can reason, speak, plan, and propose actions, while the world itself stays consistent, testable, and understandable.
 
-Reusable Clockgrove product and engineering skills. These provide domain competence independently from Factory's engineering-management capabilities.
+## Meet Raccoon World
 
-### `clockgrove/.github`
+Clockgrove's first reference world is a cozy Pacific Northwest raccoon neighborhood. Rain changes comfort and resources, food appears and disappears, plants grow, neighbors learn from one another, and relationships influence what happens next.
 
-Organization profile and the Clockgrove Copilot plugin marketplace used to distribute Factory and Skills to target repositories.
+It is a small world designed to explore a big question: what becomes possible when a digital place has continuity, memory, and inhabitants whose experiences genuinely matter?
 
-## Project principles
+## Growing the grove
 
-- Durable truth is explicit and inspectable.
-- Agent cognition is powerful without becoming implicit authority.
-- GitHub provides the engineering substrate; Factory provides engineering management; Skills provide reusable engineering competence.
-- Deterministic controls are enforced mechanically where possible rather than delegated to model judgment.
-- Commodity infrastructure is reused before custom infrastructure is built.
-- Target projects remain independently buildable and operable without Factory as a runtime dependency.
-- Documentation and architecture are publication-ready by default.
-
-The projects are under active development. Public contribution and release guidance will be added as individual repositories reach their open-source readiness gates.
+Clockgrove is under active development. We are currently building the foundations for persistent simulation, memorable characters, and worlds that can grow richer over time.
