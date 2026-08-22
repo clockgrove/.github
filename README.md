@@ -1,35 +1,29 @@
-# Clockgrove organization configuration
+# Clockgrove
 
-This repository contains organization-level GitHub configuration and the public Clockgrove organization profile.
+Clockgrove is an open-source platform for building persistent artificial-life worlds: places that keep time, change while nobody is watching, remember what happened, and give their inhabitants meaningful lives of their own.
 
-## Copilot capability marketplace
+Our guiding idea is simple:
 
-`.github/plugin/marketplace.json` publishes the Clockgrove capability packages used by project repositories:
+> Build persistent worlds from deterministic physical truth and subjective, agentic cognition.
 
-- `clockgrove-factory` — Director and engineering-management capabilities from `clockgrove/factory`;
-- `clockgrove-skills` — reusable Clockgrove product/engineering skills from `clockgrove/skills`.
+## Worlds that feel alive
 
-The source repositories contain GitHub Copilot-compatible root `plugin.json` manifests. This repository is the shared marketplace catalog; Factory and Skills do not need to duplicate it.
+Clockgrove brings together:
 
-Register and install the packages with GitHub Copilot CLI:
+- persistent simulation, where time, weather, resources, movement, and growth continue to matter;
+- characters who perceive, remember, form beliefs, build relationships, and learn from experience;
+- conversations grounded in what each character knows and has lived through;
+- inspectable history, so important events and behaviors can be traced back to their causes; and
+- safe creative tools for shaping worlds without giving AI unchecked control over their reality.
 
-```bash
-copilot plugin marketplace add clockgrove/.github
-copilot plugin install clockgrove-factory@clockgrove
-copilot plugin install clockgrove-skills@clockgrove
-```
+The simulation remains the source of truth. AI can reason, speak, plan, and propose actions, while the world itself stays consistent, testable, and understandable.
 
-A plugin can also be installed directly from its repository without registering the marketplace:
+## Meet Raccoon World
 
-```bash
-copilot plugin install clockgrove/factory
-copilot plugin install clockgrove/skills
-```
+Clockgrove's first reference world is a cozy Pacific Northwest raccoon neighborhood. Rain changes comfort and resources, food appears and disappears, plants grow, neighbors learn from one another, and relationships influence what happens next.
 
-Target repositories can enable the marketplace and packages declaratively through `.github/copilot/settings.json`. The marketplace is distribution/configuration only; product authority remains in the target repository, Factory behavior remains in `clockgrove/factory`, and shared skill behavior remains in `clockgrove/skills`.
+It is a small world designed to explore a big question: what becomes possible when a digital place has continuity, memory, and inhabitants whose experiences genuinely matter?
 
-## Release discipline
+## Growing the grove
 
-Versioned capability entries use the GitHub Copilot source object's `sha` field with a full immutable commit SHA, as recommended for reproducible installs. They never use a moving branch or tag. `scripts/validate-marketplace.py` and the corresponding GitHub Actions check enforce the release inventory and pin format before changes are merged.
-
-Consumer repositories may additionally pin the marketplace repository itself to a reviewed commit SHA so their complete capability resolution is reproducible.
+Clockgrove is under active development. We are currently building the foundations for persistent simulation, memorable characters, and worlds that can grow richer over time.

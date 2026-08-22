@@ -2,16 +2,8 @@ name: Validate Clockgrove Marketplace
 
 on:
   pull_request:
-    paths:
-      - '.github/plugin/marketplace.json'
-      - 'scripts/validate-marketplace.py'
-      - '.github/workflows/validate-marketplace.yml'
   push:
     branches: [main]
-    paths:
-      - '.github/plugin/marketplace.json'
-      - 'scripts/validate-marketplace.py'
-      - '.github/workflows/validate-marketplace.yml'
 
 permissions:
   contents: read
